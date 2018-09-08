@@ -11,5 +11,4 @@ Encoding: UTF-8
 LazyData: true
 Depends: fda,lattice
 RoxygenNote: 6.1.0
-Imports: Rcpp (>= 0.12.18)
-LinkingTo: Rcpp
+
