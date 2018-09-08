@@ -1,0 +1,15 @@
+Package: sfar
+Type: Package
+Title: Seasonal functional autoregressive models
+Version: 0.1.0
+Author: Hossein Haghbin, 
+Maintainer: Hossein Haghbin <haghbinh@gmail.com>
+Description: Seasonal functional autoregressive time series of order one, estimation and forecasting tools.
+License: GPL (>= 2)
+URL: https://github.com/haghbinh/sfar.git
+Encoding: UTF-8
+LazyData: true
+Depends: fda,lattice
+RoxygenNote: 6.1.0
+Imports: Rcpp (>= 0.12.18)
+LinkingTo: Rcpp
