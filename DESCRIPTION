@@ -1,7 +1,7 @@
 Package: sfar
 Type: Package
 Title: Seasonal functional autoregressive models
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Author: Authors@R: c(
     person("Hossein", "Haghbin", email = "haghbinh@gmail.com", role = c("aut", "cre")),
     person("Rob J.", "Hyndman", email = "Rob.Hyndman@monash.edu", role = "aut"))
@@ -13,3 +13,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
 Imports: fda
+Depends: fda

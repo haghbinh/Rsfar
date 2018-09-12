@@ -27,6 +27,8 @@ A matrix of size p*p.
 sfar is a function for SFAR(1) Model of a functional time series.
 }
 \examples{
+require(sfar)
+require(fda)
 kr <- function(x,y) (2-(2*x-1)^2-(2*y-1)^2)/2
 N <- 300 # the length of the series
 n <- 200 # the sample rate that each function will be sampled

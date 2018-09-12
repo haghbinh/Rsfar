@@ -10,6 +10,8 @@
 #' @param method a character string giving the method of estimation. The following values are possible  :"MME" for Method of Moments and "ULSE" for Unconditional Least Square Estimation Method.
 #' @param a a numeric with values in [0,1].
 #' @examples
+#' require(sfar)
+#' require(fda)
 #' kr <- function(x,y) (2-(2*x-1)^2-(2*y-1)^2)/2
 #' N <- 300 # the length of the series
 #' n <- 200 # the sample rate that each function will be sampled
@@ -34,7 +36,7 @@ sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Co
   d <- nrow(X$coefs)
   N <- ncol(Coefs)
   basis <- X$basis
-  G <- fda::inprod(basis, basis)
+  G <- inprod(basis, basis)
   Cl <- function(l) {
     s0 <- matrix(0L, nrow= d, ncol= d)
     for (i in (l + 1L):N) {

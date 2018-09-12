@@ -16,7 +16,8 @@
 #' @param Z the functional noise object of the class 'fd'.
 #'
 #' @examples
-#' library(sfar)
+#' require(sfar)
+#' require(fda)
 #' # Compute the standardaized constant of a kerel function with resoect to given HS norm.
 #' gamma0 <- function(norm,kr){
 #'   f <- function(x){

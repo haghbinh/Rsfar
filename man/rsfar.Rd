@@ -29,7 +29,8 @@ The SARIMA model is developed from the ARMA model. This model is based on the ap
 behavior has been eliminated. The SARIMA model, reflecting the feature of seasonal variation in time series, can be devided into simple and multiple models.
 }
 \examples{
-library(sfar)
+require(sfar)
+require(fda)
 # Compute the standardaized constant of a kerel function with resoect to given HS norm.
 gamma0 <- function(norm,kr){
   f <- function(x){
