@@ -1,4 +1,11 @@
-# Create Block Diagonal matrix
+#' Create Block Diagonal matrix
+#'
+#' Get an kernel function k(s,t) corresponds to an integral operator and a
+#' basis system, return the corresponding matrix of the operator with respect
+#' to given basis system.
+#' @param A a numeric vectors with values in [0,1].
+#' @param k a  bivariate
+#' @export
 Bdiag <- function(A, k) {
   m <- nrow(A)
   n <- ncol(A)
@@ -22,32 +29,13 @@ Bdiag <- function(A, k) {
   return(S1)
 }
 
-# Setting wireframe plot panel in lattice:
-panel.3d.levelplot <-
-  function(x, y, z, rot.mat, distance, zlim.scaled, at,
-             drape = TRUE, shade = FALSE, ...) {
-    panel.3dwire(x, y, z,
-      rot.mat = rot.mat, distance = distance,
-      zlim.scaled = zlim.scaled, at = at,
-      drape = FALSE, shade = shade, ...
-    )
-    zrng <- 0.001 * diff(zlim.scaled) ## vertical range of 2nd surface (>0)
-    z.scaled <- (z - min(z)) / diff(range(z))
-    at.scaled <- (at - min(z)) / diff(range(z))
-    new.z <- zlim.scaled[2] + zrng * (z.scaled - 1)
-    new.at <- zlim.scaled[2] + zrng * (at.scaled - 1)
-    panel.3dwire(x, y, new.z,
-      at = new.at,
-      col = "transparent",
-      rot.mat = rot.mat, distance = distance,
-      shade = FALSE,
-      drape = TRUE,
-      zlim.scaled = zlim.scaled,
-      alpha = 0.8,
-      ...
-    )
-  }
-
+#' Create Block Diagonal matrix
+#'
+#' Get an kernel function k(s,t) corresponds to an integral operator and a
+#' basis system, return the corresponding matrix of the operator with respect
+#' to given basis system.
+#' @param A a numeric vectors with values in [0,1].
+#' @export
 invsqrt <- function(A){
   if(!is.matrix(A)) stop("A is not a matrix") else
     if(nrow(A)!=ncol(A)) stop("A is not an sqare matrix") else

@@ -30,6 +30,7 @@
 #' X <- rsfar(kr,s,Z)
 #' # SFAR(1) model parameters estimation:
 #' Model1 <- sfar(X,seasonal=s,kn=1)
+#' @importFrom fda fd smooth.basis inprod pca.fd bifd
 #' @export
 sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Coefs)^(-1/6)) {
   Coefs <- X$coefs
@@ -63,9 +64,9 @@ sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Co
   if (method == "ULSE") {
     X_scores <- as.matrix(Q$scores[, 1L:kn]) # an N*kn matrix of scores
     X0 <- matrix(c(X_scores[(seasonal + 1):N, ]), ncol = 1) # (N-s)kn by 1 matrix
-    Z <- sfar:::Bdiag(t(as.matrix(X_scores[1L, ])), kn)
+    Z <- Bdiag(t(as.matrix(X_scores[1L, ])), kn)
     for (i in seq(2L, N - seasonal)) {
-      Z1 <- sfar:::Bdiag(t(as.matrix(X_scores[i, ])), kn)
+      Z1 <- Bdiag(t(as.matrix(X_scores[i, ])), kn)
       Z <- rbind(Z, Z1)
     }
     Phi_00 <- solve(t(Z) %*% Z) %*% t(Z) %*% X0
