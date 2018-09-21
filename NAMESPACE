@@ -2,7 +2,6 @@
 
 S3method(predict,sfar)
 export(Bdiag)
-export(OpsMat)
 export(invsqrt)
 export(rsfar)
 export(sfar)

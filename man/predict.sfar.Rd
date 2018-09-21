@@ -7,12 +7,42 @@
 \method{predict}{sfar}(object, h, ...)
 }
 \arguments{
-\item{object}{a fit sfar object.}
+\item{object}{an `sfar` object containing a fitted SFAR(1) model.}
 
-\item{h}{number of steps ahead at which to predict.}
+\item{h}{number of steps ahead to predict.}
 
-\item{...}{other.}
+\item{...}{Other parameters, not currently used.}
 }
 \description{
-The h step ahead prediction for an SFAR(1) model.
+Compute h-step-ahead prediction for an SFAR(1) model. Only the h-step
+predicted function is returned, not the predictions for 1,2,...,h.
+}
+\examples{
+# Generate Brownian motion noise
+N <- 300 # the length of the series
+n <- 200 # the sample rate that each function will be sampled
+u <- seq(0, 1, length.out = n) # argvalues of the functions
+d <- 45 # the number of bases
+basis <- create.fourier.basis(c(0, 1), d) # the basis system
+sigma <- 0.05 # the std of noise norm
+Z0 <- matrix(rnorm(N * n, 0, sigma), nrow = n, nc = N)
+Z0[, 1] <- 0
+Z_mat <- apply(Z0, 2, cumsum) # N standard Brownian motion
+Z <- smooth.basis(u, Z_mat, basis)$fd
+
+# Simulate random SFAR(1) data
+kr <- function(x, y) {
+  (2 - (2 * x - 1)^2 - (2 * y - 1)^2) / 2
+}
+s <- 5 # the period number
+X <- rsfar(kr, s, Z)
+plot(X)
+
+# SFAR(1) model parameter estimation:
+Model1 <- sfar(X, seasonal = s, kn = 1)
+
+# Forecasting 3 steps ahead
+fc <- predict(Model1, h = 3)
+plot(fc)
+
 }

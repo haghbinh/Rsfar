@@ -2,7 +2,7 @@
 % Please edit documentation in R/sfar.r
 \name{sfar}
 \alias{sfar}
-\title{Estimation of SFAR(1) Model  Parameters.}
+\title{Estimation of an SFAR(1) Model}
 \usage{
 sfar(X, seasonal, cpv = 0.85, kn = NULL, method = "MME",
   a = ncol(Coefs)^(-1/6))
@@ -24,27 +24,29 @@ sfar(X, seasonal, cpv = 0.85, kn = NULL, method = "MME",
 A matrix of size p*p.
 }
 \description{
-sfar is a function for SFAR(1) Model of a functional time series.
+Estimate a seasonal functional autoregressive (SFAR) model of order 1 for a given functional time series.
 }
 \examples{
-require(sfar)
-require(fda)
-kr <- function(x,y) (2-(2*x-1)^2-(2*y-1)^2)/2
+# Generate Brownian motion noise
 N <- 300 # the length of the series
 n <- 200 # the sample rate that each function will be sampled
-s <- 5 # the period number
-u <- seq(0, 1,length.out = n) # argvalues of the functions
-d <- 45 # the basises number
-basis <- create.fourier.basis(c(0,1),d) # the basis system
+u <- seq(0, 1, length.out = n) # argvalues of the functions
+d <- 45 # the number of bases
+basis <- create.fourier.basis(c(0, 1), d) # the basis system
 sigma <- 0.05 # the std of noise norm
+Z0 <- matrix(rnorm(N * n, 0, sigma), nrow = n, nc = N)
+Z0[, 1] <- 0
+Z_mat <- apply(Z0, 2, cumsum) # N standard Brownian motion
+Z <- smooth.basis(u, Z_mat, basis)$fd
 
-# Brownian motion noise generation:
-set.seed(10)
-Z0 <- matrix(rnorm(N*n,0,sigma),nrow=n,nc=N)
-Z0[,1] <- 0
-Z_mat <- apply(Z0,2,cumsum) # N standard Brownian motion
-Z <- smooth.basis(u,Z_mat,basis)$fd
-X <- rsfar(kr,s,Z)
-# SFAR(1) model parameters estimation:
-Model1 <- sfar(X,seasonal=s,kn=1)
+# Simulate random SFAR(1) data
+kr <- function(x, y) {
+ (2 - (2 * x - 1)^2 - (2 * y - 1)^2) / 2
+}
+s <- 5 # the period number
+X <- rsfar(kr, s, Z)
+plot(X)
+
+# SFAR(1) model parameter estimation:
+Model1 <- sfar(X, seasonal = s, kn = 1)
 }
