@@ -2,17 +2,18 @@
 % Please edit documentation in R/utils.r
 \name{Bdiag}
 \alias{Bdiag}
-\title{Create Block Diagonal matrix}
+\title{Create block diagonal matrix}
 \usage{
 Bdiag(A, k)
 }
 \arguments{
-\item{A}{a numeric vectors with values in [0,1].}
+\item{A}{a numeric matrix with values in [0,1] forming each block.}
 
-\item{k}{a  bivariate}
+\item{k}{a numeric value indicating the number of blocks.}
 }
 \description{
-Get an kernel function k(s,t) corresponds to an integral operator and a
-basis system, return the corresponding matrix of the operator with respect
-to given basis system.
+Create block diagonal matrix
+}
+\examples{
+Bdiag(matrix(1:4,2,2), 3)
 }

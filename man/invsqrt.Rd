@@ -2,15 +2,17 @@
 % Please edit documentation in R/utils.r
 \name{invsqrt}
 \alias{invsqrt}
-\title{Create Block Diagonal matrix}
+\title{Return inverse square root of square positive-definite matrix.}
 \usage{
 invsqrt(A)
 }
 \arguments{
-\item{A}{a numeric vectors with values in [0,1].}
+\item{A}{a numeric matrix with values in [0,1].}
 }
 \description{
-Get an kernel function k(s,t) corresponds to an integral operator and a
-basis system, return the corresponding matrix of the operator with respect
-to given basis system.
+Return inverse square root of square positive-definite matrix.
+}
+\examples{
+X <- Bdiag(matrix(1:4,2,2), 3)
+invsqrt(t(X) \%*\% X)
 }

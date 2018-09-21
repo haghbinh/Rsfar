@@ -1,10 +1,9 @@
-#' Create Block Diagonal matrix
+#' Create block diagonal matrix
 #'
-#' Get an kernel function k(s,t) corresponds to an integral operator and a
-#' basis system, return the corresponding matrix of the operator with respect
-#' to given basis system.
-#' @param A a numeric vectors with values in [0,1].
-#' @param k a  bivariate
+#' @param A a numeric matrix with values in [0,1] forming each block.
+#' @param k a numeric value indicating the number of blocks.
+#' @examples
+#' Bdiag(matrix(1:4,2,2), 3)
 #' @export
 Bdiag <- function(A, k) {
   m <- nrow(A)
@@ -26,25 +25,32 @@ Bdiag <- function(A, k) {
       S1 <- rbind(S1, S2)
     }
   }
+  else if (k < 1) {
+    stop("k must be a positive integer")
+  }
   return(S1)
 }
 
-#' Create Block Diagonal matrix
+#' Return inverse square root of square positive-definite matrix.
 #'
-#' Get an kernel function k(s,t) corresponds to an integral operator and a
-#' basis system, return the corresponding matrix of the operator with respect
-#' to given basis system.
-#' @param A a numeric vectors with values in [0,1].
+#' @param A a numeric matrix with values in [0,1].
+#' @examples
+#' X <- Bdiag(matrix(1:4,2,2), 3)
+#' invsqrt(t(X) %*% X)
 #' @export
-invsqrt <- function(A){
-  if(!is.matrix(A)) stop("A is not a matrix") else
-    if(nrow(A)!=ncol(A)) stop("A is not an sqare matrix") else
-      if(!all(eigen(A)$values>0)) stop("A is not a positive definite matrix")
-  n <- nrow(A)
+invsqrt <- function(A) {
+  if (!is.matrix(A)) {
+    stop("A is not a matrix")
+  } else if (nrow(A) != ncol(A)) {
+    stop("A is not an sqare matrix")
+  }
   Q <- eigen(A)
-  U <- Q$vectors
   lambda <- Q$values
+  if (!all(lambda > 0)) {
+    stop("A is not a positive definite matrix")
+  }
+  U <- Q$vectors
   r <- length(lambda)
-  M <- diag(1/sqrt(lambda), nrow = r, ncol = r)
+  M <- diag(1 / sqrt(lambda), nrow = r, ncol = r)
   return(U %*% M %*% t(U))
 }
