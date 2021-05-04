@@ -6,29 +6,15 @@
 #' Bdiag(matrix(1:4,2,2), 3)
 #' @export
 Bdiag <- function(A, k) {
+  if(k < 1 | abs(k -round(k)) > 1e-6)
+    stop("k must be a positive integer")
   m <- nrow(A)
   n <- ncol(A)
-  O <- matrix(0L, nrow = m, ncol = n)
-  S1 <- A
-  if (k > 1) {
-    for (j in seq(2L, k))
-      S1 <- cbind(S1, O)
-    for (i in seq(2L, k)) {
-      S2 <- O
-      for (j in seq(2L, k)) {
-        if (i == j) {
-          S2 <- cbind(S2, A)
-        } else {
-          S2 <- cbind(S2, O)
-        }
-      }
-      S1 <- rbind(S1, S2)
-    }
+  B <- matrix(0, nrow=k*m, ncol=k*n)
+  for(i in 0L:(k-1)) {
+    B[i*m + seq(m), i*n + seq(n)] <- A
   }
-  else if (k < 1) {
-    stop("k must be a positive integer")
-  }
-  return(S1)
+  return(B)
 }
 
 #' Return inverse square root of square positive-definite matrix.
