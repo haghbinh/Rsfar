@@ -4,11 +4,12 @@
 #' @return A matrix of size p*p.
 #'
 #' @param X a functional time series.
-#' @param seasonal a positive integer variable specifying the seasonality paprameter.
+#' @param seasonal a positive integer variable specifying the seasonality parameter.
 #' @param cpv a numeric with values in [0,1] which determines the cumulative proportion variance explained by the first kn eigencomponents.
 #' @param kn an integer variable specifying the number of eigencomponents.
-#' @param method a character string giving the method of estimation. The following values are possible  :"MME" for Method of Moments and "ULSE" for Unconditional Least Square Estimation Method.
-#' @param a a numeric with values in [0,1].
+#' @param method a character string giving the method of estimation. The following values are possible:
+#'   "MME" for Method of Moments, "ULSE" for Unconditional Least Square Estimation Method, and "KOE" for Kargin-Ontaski Estimation.
+#' @param a a numeric with value in [0,1].
 #' @examples
 #' # Generate Brownian motion noise
 #' N <- 300 # the length of the series

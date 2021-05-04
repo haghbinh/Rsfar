@@ -7,7 +7,7 @@
 invsqrt(A)
 }
 \arguments{
-\item{A}{a numeric matrix with values in [0,1].}
+\item{A}{a numeric matrix}
 }
 \description{
 Return inverse square root of square positive-definite matrix.

@@ -7,9 +7,9 @@
 Bdiag(A, k)
 }
 \arguments{
-\item{A}{a numeric matrix with values in [0,1] forming each block.}
+\item{A}{a numeric matrix forming each block.}
 
-\item{k}{a numeric value indicating the number of blocks.}
+\item{k}{an integer value indicating the number of blocks.}
 }
 \description{
 Create block diagonal matrix

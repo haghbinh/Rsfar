@@ -10,29 +10,30 @@ sfar(
   seasonal,
   cpv = 0.85,
   kn = NULL,
-  method = "MME",
+  method = c("MME", "ULSE", "KOE"),
   a = ncol(Coefs)^(-1/6)
 )
 }
 \arguments{
 \item{X}{a functional time series.}
 
-\item{seasonal}{a positive integer variable specifying the seasonality paprameter.}
+\item{seasonal}{a positive integer variable specifying the seasonality parameter.}
 
 \item{cpv}{a numeric with values in [0,1] which determines the cumulative proportion variance explained by the first kn eigencomponents.}
 
 \item{kn}{an integer variable specifying the number of eigencomponents.}
 
-\item{method}{a character string giving the method of estimation. The following values are possible  :"MME" for Method of Moments and "ULSE" for Unconditional Least Square Estimation Method.}
+\item{method}{a character string giving the method of estimation. The following values are possible:
+"MME" for Method of Moments, "ULSE" for Unconditional Least Square Estimation Method, and "KOE" for Kargin-Ontaski Estimation.}
 
-\item{a}{a numeric with values in [0,1].}
+\item{a}{a numeric with value in [0,1].}
 }
 \value{
 A matrix of size p*p.
 }
 \description{
 The sfar package provides the collection of necessary
-functions  for simulating, estimating and forecasting seasonal functional
+functions for simulating, estimating and forecasting seasonal functional
 autoregressive (SFAR) time series of order one.
 
 Estimate a seasonal functional autoregressive (SFAR) model of order 1 for a given functional time series.
@@ -41,8 +42,7 @@ Estimate a seasonal functional autoregressive (SFAR) model of order 1 for a give
 Functional autoregressive models are popular for functional time series analysis, but
 the standard formulation fails to address seasonal behavior in functional time series data.
 To overcome this shortcoming, we introduce seasonal functional autoregressive time series
-models. For the model of order one, we derive sufficient stationarity conditions and limiting behavior, and provide estimation and prediction methods. Moreover, we consider a
-portmanteau test for testing the adequacy of this model and we derive its asymptotic distribution.
+models. For the model of order one, we provide estimation, prediction and simulation methods.
 }
 \examples{
 # Generate Brownian motion noise
@@ -71,6 +71,7 @@ Model1 <- sfar(X, seasonal = s, kn = 1)
 \references{
 Atefeh Z., Hossein H., Maryam H., and R.J Hyndman (2021).
   Seasonal functional autoregressive models. Manuscript submitted for publication.
+  \url{https://robjhyndman.com/publications/sfar/}
 }
 \seealso{
 \code{\link{sfar}}, \code{\link{predict.sfar}},

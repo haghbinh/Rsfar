@@ -44,5 +44,4 @@ Model1 <- sfar(X, seasonal = s, kn = 1)
 # Forecasting 3 steps ahead
 fc <- predict(Model1, h = 3)
 plot(fc)
-
 }

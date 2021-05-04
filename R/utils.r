@@ -1,7 +1,7 @@
 #' Create block diagonal matrix
 #'
-#' @param A a numeric matrix with values in [0,1] forming each block.
-#' @param k a numeric value indicating the number of blocks.
+#' @param A a numeric matrix forming each block.
+#' @param k an integer value indicating the number of blocks.
 #' @examples
 #' Bdiag(matrix(1:4,2,2), 3)
 #' @export
@@ -33,7 +33,7 @@ Bdiag <- function(A, k) {
 
 #' Return inverse square root of square positive-definite matrix.
 #'
-#' @param A a numeric matrix with values in [0,1].
+#' @param A a numeric matrix
 #' @examples
 #' X <- Bdiag(matrix(1:4,2,2), 3)
 #' invsqrt(t(X) %*% X)
