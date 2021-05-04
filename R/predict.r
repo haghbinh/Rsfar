@@ -32,7 +32,7 @@
 #' # Forecasting 3 steps ahead
 #' fc <- predict(Model1, h = 3)
 #' plot(fc)
-#'
+#' @importFrom fda fd
 #' @export
 predict.sfar <- function(object, h, ...) {
   S <- object$seasonal

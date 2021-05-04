@@ -47,6 +47,7 @@
 #' s <- 5 # the period number
 #' X <- rsfar(phi, s, Z)
 #' plot(X)
+#' @importFrom fda fd
 #' @export
 rsfar <- function(phi, seasonal, Z) {
   u <- seq(Z$basis$rangeval[1], Z$basis$rangeval[2], by = 0.01)
@@ -56,6 +57,7 @@ rsfar <- function(phi, seasonal, Z) {
   d <- nrow(Z_coef)
   N <- ncol(Z_coef)
   X_coef <- Z_coef
-  for (i in (seasonal + 1L):N) X_coef[, i] <- X_coef[, (i - seasonal)] %*% k_mat + Z_coef[, i]
+  for (i in (seasonal + 1L):N)
+    X_coef[, i] <- X_coef[, (i - seasonal)] %*% k_mat + Z_coef[, i]
   return(fd(X_coef, basis))
 }

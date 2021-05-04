@@ -7,6 +7,7 @@
 # @param ker a function taking two inputs corrresponding to an integral operator.
 # @param basis a functional basis object defining the basis.
 # @return A numeric square matrix of the rank of basis system.
+#' @importFrom fda smooth.basis inprod
 OpsMat <- function(u, ker, basis) {
   n <- length(u)
   K_mat <- outer(u, u, FUN = ker)
