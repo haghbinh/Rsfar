@@ -35,7 +35,8 @@
 #' Model1 <- sfar(X, seasonal = s, kn = 1)
 #' @importFrom fda fd smooth.basis inprod pca.fd bifd
 #' @export
-sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Coefs)^(-1/6)) {
+sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = c("MME","ULSE","KOE"), a = ncol(Coefs)^(-1/6)) {
+  method <- match.arg(method)
   Coefs <- X$coefs
   d <- nrow(X$coefs)
   N <- ncol(Coefs)
@@ -56,15 +57,13 @@ sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Co
   lambda <- lambda0[1:kn]
   cpv1 <- sum(lambda) / sum(lambda0)
   nu <- Q$harmonics[1:kn] # FPC's components
-  out <- vector(mode = "list", length = 4L)
   Vhat <- inprod(basis, nu)
   if (method == "MME") {
     V <- nu$coefs
     V0 <- inprod(basis, nu)
     La_inv <- diag(1/lambda,nrow=kn,ncol = kn)
     Phi <- V0 %*% La_inv %*% t(V) %*% CS %*% G # an d*d matrix corresponds to autoregressive operator.
-  }
-  if (method == "ULSE") {
+  } else if (method == "ULSE") {
     X_scores <- as.matrix(Q$scores[, 1L:kn]) # an N*kn matrix of scores
     X0 <- matrix(c(X_scores[(seasonal + 1):N, ]), ncol = 1) # (N-s)kn by 1 matrix
     Z <- Bdiag(t(as.matrix(X_scores[1L, ])), kn)
@@ -75,8 +74,7 @@ sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Co
     Phi_00 <- solve(t(Z) %*% Z) %*% t(Z) %*% X0
     Phi_hat0 <- matrix(c(Phi_00), byrow = TRUE, nrow= kn)
     Phi <- Vhat %*% Phi_hat0 %*% t(Vhat)
-  }
-  if (method == "KOE") {
+  } else if (method == "KOE") {
     Q00 <- eigen(C0)
     Ca <- C0 + diag(a, nrow = d, ncol = d)
     C12 <- invsqrt(Ca)
@@ -87,16 +85,16 @@ sfar <- function(X, seasonal, cpv = 0.85, kn = NULL, method = "MME", a = ncol(Co
     V <- as.matrix(Q00$vectors[, 1L:kn])
     Phi <- C12 %*% G %*% Va %*% t(Va) %*% C12 %*% G %*% CS  # an d*d matrix corresponds to autoregressive operator.
   }
-    out <- list(Phi = Phi)
-    out$kernel <- bifd(solve(G) %*% Phi, basis, basis)
-    out$cpv <- cpv1
-    out$CS <- CS
-    out$a <- a
-    out$X <- X
-    out$tau <- Q$values[1:kn]
-    out$seasonal <- seasonal
-    out$method <- method
-    class(out) <- "sfar"
-    return(out)
+  structure(list(
+    Phi = Phi,
+    kernel = bifd(solve(G) %*% Phi, basis, basis),
+    cpv = cpv1,
+    CS = CS,
+    a = a,
+    X = X,
+    tau = Q$values[1:kn],
+    seasonal = seasonal,
+    method = method
+  ), class="sfar")
 }
 
