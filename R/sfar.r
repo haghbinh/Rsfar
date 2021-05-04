@@ -19,5 +19,5 @@
 #'   \url{https://robjhyndman.com/publications/sfar/}
 #'
 #' @docType package
-#' @name sfar
+#' @name sfar-package
 NULL
