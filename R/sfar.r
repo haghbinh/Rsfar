@@ -1,8 +1,8 @@
-#' sfar: A Package for Seasonal Functional Autoregressive Models.
+#' Rsfar: A Package for Seasonal Functional Autoregressive Models.
 #'
-#' The sfar package provides the collection of necessary
+#' The Rsfar package provides the collection of necessary
 #' functions for simulating, estimating and forecasting seasonal functional
-#' autoregressive (SFAR) time series of order one.
+#' autoregressive time series of order one.
 #'
 #'@details
 #' Functional autoregressive models are popular for functional time series analysis, but
@@ -19,5 +19,5 @@
 #'   \url{https://robjhyndman.com/publications/sfar/}
 #'
 #' @docType package
-#' @name sfar-package
+#' @name Rsfar-package
 NULL
