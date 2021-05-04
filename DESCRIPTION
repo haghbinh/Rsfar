@@ -1,14 +1,14 @@
 Package: sfar
 Type: Package
-Title: Seasonal functional autoregressive models
+Title: Seasonal Functional Autoregressive Models
 Version: 0.0.1.9000
 Author: Authors@R: c(
     person("Hossein", "Haghbin", email = "haghbinh@gmail.com", role = c("aut", "cre")),
-    person("Rob J.", "Hyndman", email = "Rob.Hyndman@monash.edu", role = "aut"))
+    person("Rob", "Hyndman", email = "Rob.Hyndman@monash.edu", role = "aut"))
 Maintainer: Hossein Haghbin <haghbinh@gmail.com>
 Description: Tools for simulating, estimating and forecasting seasonal functional autoregressive (SFAR) time series of order one.
 License: GPL (>= 2)
-URL: https://github.com/haghbinh/sfar.git
+URL: https://github.com/haghbinh/sfar
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
