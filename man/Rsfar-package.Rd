@@ -3,11 +3,11 @@
 \docType{package}
 \name{Rsfar-package}
 \alias{Rsfar-package}
-\title{sfar: A Package for Seasonal Functional Autoregressive Models.}
+\title{Rsfar: A Package for Seasonal Functional Autoregressive Models.}
 \description{
-The sfar package provides the collection of necessary
+The Rsfar package provides the collection of necessary
 functions for simulating, estimating and forecasting seasonal functional
-autoregressive (SFAR) time series of order one.
+autoregressive time series of order one.
 }
 \details{
 Functional autoregressive models are popular for functional time series analysis, but
