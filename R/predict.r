@@ -2,6 +2,7 @@
 #'
 #' Compute h-step-ahead prediction for an SFAR(1) model. Only the h-step
 #' predicted function is returned, not the predictions for 1,2,...,h.
+#' @return An object of class \code{fda}.
 #' @param object an `sfar` object containing a fitted SFAR(1) model.
 #' @param h number of steps ahead to predict.
 #' @param ... Other parameters, not currently used.

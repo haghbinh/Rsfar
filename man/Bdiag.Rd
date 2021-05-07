@@ -11,6 +11,9 @@ Bdiag(A, k)
 
 \item{k}{an integer value indicating the number of blocks.}
 }
+\value{
+Return a block diagonal matrix from the matrix A.
+}
 \description{
 Create block diagonal matrix
 }

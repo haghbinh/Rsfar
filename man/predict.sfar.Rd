@@ -13,6 +13,9 @@
 
 \item{...}{Other parameters, not currently used.}
 }
+\value{
+An object of class \code{fda}.
+}
 \description{
 Compute h-step-ahead prediction for an SFAR(1) model. Only the h-step
 predicted function is returned, not the predictions for 1,2,...,h.

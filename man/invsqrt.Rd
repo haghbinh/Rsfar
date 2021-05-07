@@ -9,10 +9,14 @@ invsqrt(A)
 \arguments{
 \item{A}{a numeric matrix}
 }
+\value{
+inverse square root of square positive-definite matrix.
+}
 \description{
 Return inverse square root of square positive-definite matrix.
 }
 \examples{
+require(Rsfar)
 X <- Bdiag(matrix(1:4,2,2), 3)
 invsqrt(t(X) \%*\% X)
 }
